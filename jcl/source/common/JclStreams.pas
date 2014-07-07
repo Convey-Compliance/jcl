@@ -69,15 +69,15 @@ type
   // 64 bit version of overloaded functions are introduced
   TJclStream = class(TStream)
   protected
-    {$IFNDEF CLR}
+    {$IFNDEF Enterprise}
     procedure SetSize(NewSize: Longint); overload; override;
-    {$ENDIF ~CLR}
+    {$ENDIF}
     procedure SetSize({$IFNDEF CLR}const{$ENDIF ~CLR} NewSize: Int64);
       {$IFDEF COMPILER5} reintroduce; overload; virtual; {$ELSE} overload; override; {$ENDIF}
   public
-    {$IFNDEF CLR}
+    {$IFNDEF Enterprise}
     function Seek(Offset: Longint; Origin: Word): Longint; overload; override;
-    {$ENDIF ~CLR}
+    {$ENDIF}
     function Seek(const Offset: Int64; Origin: TSeekOrigin): Int64;
       {$IFDEF COMPILER5} reintroduce; overload; virtual; {$ELSE} overload; override; {$ENDIF}
     procedure LoadFromStream(Source: TStream; BufferSize: Longint = StreamDefaultBufferSize); virtual;
@@ -797,7 +797,7 @@ end;
 
 //=== { TJclStream } =========================================================
 
-{$IFNDEF CLR}
+{$IFNDEF Enterprise}
 function TJclStream.Seek(Offset: Longint; Origin: Word): Longint;
 var
   Result64: Int64;
@@ -816,7 +816,7 @@ begin
     Result64 := -1;
   Result := Result64;
 end;
-{$ENDIF ~CLR}
+{$ENDIF}
 
 procedure TJclStream.LoadFromFile(const FileName: TFileName;
   BufferSize: Integer);
@@ -859,12 +859,12 @@ begin
   Result := -1;
 end;
 
-{$IFNDEF CLR}
+{$IFNDEF Enterprise}
 procedure TJclStream.SetSize(NewSize: Longint);
 begin
   SetSize(Int64(NewSize));
 end;
-{$ENDIF ~CLR}
+{$ENDIF}
 
 procedure TJclStream.SetSize({$IFNDEF CLR}const{$ENDIF ~CLR} NewSize: Int64);
 begin
