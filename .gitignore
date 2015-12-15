@@ -40,7 +40,6 @@ jcl/install/dcc32_command.cmd
 jcl/install/dcc32.cfg
 
 # Auto generated compiler version include files
-jcl/source/include/jcld*.inc
 jcl/source/include/jclc*.inc
 jcl/source/include/jclfpc.inc
 jcl/source/include/jclwin32.inc
